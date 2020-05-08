@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   		
+    
+    	<context:annotation-config/>
+    	<context:component-scan base-package="com.cbt.webclient"/>
+    	
+    	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="location">
+				<value>email_config.properties</value>
+			</property>
+		</bean>
+    	
+    	<bean id="emailTemplet" class="com.cbt.webclient.model.EmailTemplet">
+    		<property name="eml_recipient" value=""/>
+    		<property name="message_body" value=""/>
+    		<property name="eml_subject" value=""/>
+    	</bean>
+    	
+    	<bean id="emailClient" class="com.cbt.webclient.email.EmailClient">
+    			<property name="smtp_host" value="${mail.smtp.host}" />
+    			<property name="smpt_port" value="${mail.smtp.port}" />
+    			<property name="smpt_auth" value="${mail.smtp.auth}" />
+    			<property name="smpt_tls_enable" value="${mail.smtp.starttls.enable}" />
+    			<property name="smpt_from_address" value="${fromemailaddress}" />
+    			<property name="smpt_email_password" value="${password}" />
+    	</bean>
+    		
+    	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    	    <!-- <property name="driverClassName" value="com.mysql.cj.jdbc.Drive"/> -->
+    	    <property name="url" value="jdbc:mysql://localhost:3306/employees"/>
+    	    <property name="username" value="root"/>
+    	    <property name="password" value="Niit@123"/>
+    	</bean>
+    	
+		 
+    	
+</beans>
