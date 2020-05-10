@@ -10,6 +10,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+/*import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;*/
 
 import com.cbt.webclient.dao.JdbcDaoImpl;
 import com.cbt.webclient.email.EmailClient;
@@ -28,6 +34,8 @@ public class AppMain {
 		EmailClient client = context.getBean("emailClient", EmailClient.class);
 		
 		AlertMonitor alertMonitor = JdbcDaoImpl.getAlertDetail(Integer.parseInt(args[0]));
+		
+		//AlertMonitor alertMonitor = getJobDetails(args[0]);
 		
 		System.out.println(alertMonitor.toString());
 		
@@ -65,7 +73,23 @@ public class AppMain {
 			listFiles.add(new FileDetails(file.getAbsolutePath(), lastModified.toLocaleString()));
 			
 		}
+
 		return listFiles;
 	}
+	
+	/*
+	 * public static AlertMonitor getJobDetails(String jobId) {
+	 * 
+	 * HttpHeaders headers = new HttpHeaders();
+	 * headers.setContentType(MediaType.APPLICATION_JSON); RestTemplate restTemplate
+	 * = new RestTemplate();
+	 * 
+	 * String url = "http://localhost:8080/job-services/job/{id}";
+	 * HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
+	 * ResponseEntity<AlertMonitor> responseEntity = restTemplate.exchange(url,
+	 * HttpMethod.GET, requestEntity, AlertMonitor.class, new Integer(jobId));
+	 * 
+	 * AlertMonitor monitor = responseEntity.getBody(); return monitor; }
+	 */
 
 }

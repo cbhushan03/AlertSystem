@@ -1,0 +1,7 @@
+com\cbt\webclient\email\EmailClient.class
+com\cbt\webclient\model\FileDetails.class
+com\cbt\webclient\AppMain.class
+com\cbt\webclient\email\EmailClient$1.class
+com\cbt\webclient\model\AlertMonitor.class
+com\cbt\webclient\model\EmailTemplet.class
+com\cbt\webclient\dao\JdbcDaoImpl.class
